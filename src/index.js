@@ -5,15 +5,17 @@ import App from './app.js';
 import Store from './store.js';
 
 const store = new Store({
+  nextCode: 8,
   list: [
-    { code: 1, title: 'Название элемента' },
-    { code: 2, title: 'Некий объект' },
-    { code: 3, title: 'Заголовок' },
-    { code: 4, title: 'Очень длинное название элемента из семи слов' },
-    { code: 5, title: 'Запись' },
-    { code: 6, title: 'Шестая запись' },
-    { code: 7, title: 'Седьмая запись' },
+    { code: 1, title: 'Название элемента', selectedCount: 0 },
+    { code: 2, title: 'Некий объект', selectedCount: 0 },
+    { code: 3, title: 'Заголовок', selectedCount: 0 },
+    { code: 4, title: 'Очень длинное название элемента из семи слов', selectedCount: 0 },
+    { code: 5, title: 'Запись', selectedCount: 0 },
+    { code: 6, title: 'Шестая запись', selectedCount: 0 },
+    { code: 7, title: 'Седьмая запись', selectedCount: 0 },
   ],
+
 });
 
 const root = createRoot(document.getElementById('root'));
