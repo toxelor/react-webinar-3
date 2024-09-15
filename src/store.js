@@ -1,6 +1,7 @@
 /**
  * Хранилище состояния приложения
  */
+
 class Store {
   constructor(initState = {}) {
     this.state = initState;
@@ -41,13 +42,26 @@ class Store {
   /**
    * Добавление новой записи
    */
-  addItem() {
+
+  getUniqueCode = () => {
+    const codes = []
+    this.state.list.map((item) => !codes.includes(item.code) && codes.push(item.code))
+    let newCode = this.state.nextCode
+    while (codes.includes(newCode)) {
+      newCode++
+    }
     this.setState({
       ...this.state,
-      nextCode: this.state.nextCode + 1,
+      nextCode: newCode,
+    });
+  }
+  addItem() {
+    this.getUniqueCode()
+    this.setState({
+      ...this.state,
+      //nextCode: this.state.nextCode <= this.state.list.length ? this.state.list.length + 1 : this.state.nextCode + 1,
       list: [...this.state.list, {code: this.state.nextCode, title: 'Новая запись', selectedCount: 0 }],
     });
-    console.log(this.state.nextCode)
   }
 
   /**
@@ -55,6 +69,7 @@ class Store {
    * @param code
    */
   deleteItem(code) {
+    this.getUniqueCode()
     this.setState({
       ...this.state,
       list: this.state.list.filter(item => item.code !== code),

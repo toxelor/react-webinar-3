@@ -10,6 +10,18 @@ import './styles.css';
 function App({ store }) {
   const list = store.getState().list;
 
+  const isRaz = (count) => {
+    let importantCount = count % 100;
+    if (importantCount > 4 && importantCount < 22) {
+      return true
+    }
+    importantCount = importantCount % 10
+    if (importantCount > 1 && importantCount < 5) {
+      return false
+    }
+    return true
+  }
+
   return (
     <div className="App">
       <div className="App-head">
@@ -27,7 +39,7 @@ function App({ store }) {
                 onClick={() => store.selectItem(item.code)}
               >
                 <div className="Item-code">{item.code}</div>
-                <div className="Item-title">{item.title} {item.selectedCount > 0 && (' | Выделяли ' + item.selectedCount + ' раз' )}</div>
+                <div className="Item-title">{item.title} {item.selectedCount > 0 && (' | Выделяли ' + item.selectedCount + (isRaz(item.selectedCount) ? ' раз' : ' раза' ))}</div>
                 <div className="Item-actions">
                   <button onClick={() => store.deleteItem(item.code)}>Удалить</button>
                 </div>
